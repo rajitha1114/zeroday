@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://z3roday.com/sitemap.xml

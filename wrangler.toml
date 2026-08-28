@@ -1,0 +1,26 @@
+name = "z3roday"
+main = "src/index.js"
+compatibility_date = "2026-08-01"
+
+[assets]
+directory = "./public"
+binding = "ASSETS"
+not_found_handling = "404-page"
+html_handling = "auto-trailing-slash"
+
+# Set these with `wrangler secret put`, never in this file:
+#   RESEND_API_KEY
+#
+# These two are not secret, so they can live here.
+[vars]
+ENQUIRY_TO = "hello@z3roday.com"
+ENQUIRY_FROM = "site@z3roday.com"
+
+# Uncomment once the domain is added to this Cloudflare account.
+# [[routes]]
+# pattern = "z3roday.com"
+# custom_domain = true
+#
+# [[routes]]
+# pattern = "www.z3roday.com"
+# custom_domain = true

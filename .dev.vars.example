@@ -1,0 +1,4 @@
+# Copy to .dev.vars for local `wrangler dev`. Never commit .dev.vars
+RESEND_API_KEY=re_xxxxxxxxxxxx
+ENQUIRY_TO=hello@z3roday.com
+ENQUIRY_FROM=site@z3roday.com
