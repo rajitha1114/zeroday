@@ -307,6 +307,25 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.8rem
 .co-work{font-family:"IBM Plex Mono",monospace;font-size:.66rem;color:rgba(237,239,242,.42);margin-top:1.3rem;line-height:1.8;border-top:1px solid rgba(237,239,242,.14);padding-top:1rem}
 @media(max-width:900px){.calc{grid-template-columns:1fr;gap:2.5rem}}
 
+/* ---- motion ---- */
+@media (prefers-reduced-motion: no-preference){
+  .js .reveal{opacity:0;transform:translateY(16px);transition:opacity .7s cubic-bezier(.22,.7,.2,1),transform .7s cubic-bezier(.22,.7,.2,1)}
+  .js .reveal.in{opacity:1;transform:none}
+  .js .ledger .lrow{opacity:0;transform:translateX(-8px)}
+  .js .ledger.scanning .lrow{animation:rowin .5s cubic-bezier(.22,.7,.2,1) forwards}
+  @keyframes rowin{to{opacity:1;transform:none}}
+  .scanline{position:absolute;left:0;right:0;height:100px;pointer-events:none;top:0;opacity:0;
+    background:linear-gradient(180deg,rgba(63,125,92,0) 0%,rgba(63,125,92,.11) 60%,rgba(63,125,92,.34) 98%);
+    border-bottom:1px solid rgba(63,125,92,.55)}
+  .ledger.scanning .scanline{animation:sweep 1.7s cubic-bezier(.4,0,.3,1) forwards}
+  @keyframes sweep{0%{top:-100px;opacity:0}8%{opacity:1}88%{opacity:1}100%{top:100%;opacity:0}}
+  .fill{width:0 !important;transition:width 1.15s cubic-bezier(.22,.7,.2,1) .15s}
+  .gap.in .fill{width:var(--w) !important}
+  .strip-count{transition:color .4s}
+}
+.ledger{position:relative;overflow:hidden}
+.co-v{transition:color .25s}
+
 /* ---- should-vs-can chart ---- */
 .gap{margin-top:3rem;border-top:1px solid var(--rule);padding-top:2.2rem;max-width:56rem}
 .gap-title{font-family:"IBM Plex Mono",monospace;font-size:.66rem;letter-spacing:.13em;text-transform:uppercase;color:var(--mute);margin:0 0 1.8rem}
@@ -362,10 +381,11 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.8rem
         </div>
       </div>
 
-      <div class="ledger" aria-label="Illustrative extract from a pre-rollout AI exposure scan">
+      <div class="ledger" id="ledger" aria-label="Illustrative extract from a pre-rollout AI exposure scan">
+        <div class="scanline" aria-hidden="true"></div>
         <div class="ledger-head">
           <span class="ledger-title">Pre-rollout exposure scan — extract</span>
-          <span class="ledger-meta">7 of 3,412 findings</span>
+          <span class="ledger-meta">7 of <span id="findCount">3,412</span> findings</span>
         </div>
         <div class="lrow"><span class="ref">HR</span><span class="ctl">Remuneration bands FY26 — readable by 1,240 staff</span><span class="status s-missing">Exposed</span></div>
         <div class="lrow"><span class="ref">FIN</span><span class="ctl">Board pack, Q2 — org-wide link, never expires</span><span class="status s-missing">Exposed</span></div>
@@ -397,11 +417,11 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.8rem
         <p class="gap-title">One employee · what they need vs what they can reach</p>
         <div class="gaprow">
           <p><b>Needs for their job</b><em>Their team's sites, shared drives, current projects</em></p>
-          <div class="track"><div class="fill ok" style="width:9%">9%</div></div>
+          <div class="track"><div class="fill ok" style="--w:9%;width:9%">9%</div></div>
         </div>
         <div class="gaprow">
           <p><b>Can already retrieve</b><em>Inherited permissions, open links, orphaned sites, stale group memberships</em></p>
-          <div class="track"><div class="fill bad" style="width:74%">74%</div></div>
+          <div class="track"><div class="fill bad" style="--w:74%;width:74%">74%</div></div>
         </div>
         <p class="gap-foot">The gap between those two bars existed before the assistant did. Switching it on doesn't widen it — it just makes it searchable in plain English by everyone who has it. Shape is illustrative; the numbers on your tenant are countable, and the calculator below starts you off.</p>
       </div>
@@ -420,16 +440,16 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.8rem
         <div class="fw">
           <span class="fw-tag">Slack · Atlassian · Notion · Box</span>
           <h3>Where the sensitive conversation actually lives</h3>
-          <p>Assistants now read channel history, Confluence spaces and ticket comments — which is where people paste credentials, salary discussions and customer complaints, precisely because it felt like a conversation rather than a document.</p>
+          <p>Assistants now read channel history, Confluence spaces and ticket comments — where people paste credentials and salary discussions precisely because it felt like a conversation, not a document.</p>
         </div>
         <div class="fw">
           <span class="fw-tag">Your own build</span>
           <h3>Bespoke RAG, agents and MCP connections</h3>
-          <p>If your engineers have wired a vector store to a corpus, the permission model is now something you designed, whether you meant to or not. We look at retrieval-time authorisation, index isolation, prompt and output logging, and what an agent is permitted to <em>do</em> rather than only read.</p>
+          <p>Wire a vector store to a corpus and the permission model is now something you designed, whether you meant to or not. We look at retrieval-time authorisation, index isolation, logging, and what an agent may <em>do</em> rather than only read.</p>
         </div>
       </div>
 
-      <p class="fw-also"><strong>Day zero</strong> is the state of all of this before anyone asks a question — before the assistant is switched on, before the auditor arrives. It is the cheapest moment to fix anything, and it is where we work. That is also why there is no single product to install. The controls live inside the platform you already own, and the right configuration depends on which one that is. What we make repeatable is the assessment and the remediation pattern — not a pretence that every tenant is the same.</p>
+      <p class="fw-also"><strong>Day zero</strong> is the state of all this before anyone asks a question — before the assistant is switched on, before the auditor arrives. The cheapest moment to fix anything, and where we work. It is also why there is no product to install: the controls live inside the platform you already own. What we make repeatable is the assessment.</p>
     </div>
   </section>
 
@@ -437,11 +457,11 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.8rem
     <div class="wrap">
       <p class="eyebrow">The deadline nobody has budgeted for</p>
       <h2>APP 1.7 commences 10 December 2026. Most Australian companies are in scope and don't know it.</h2>
-      <p class="lede">You do not need a machine-learning model to be caught by this. A rules engine that declines an application, a scoring tool that ranks job applicants, a system that decides who gets a payment plan — if personal information goes in and a decision that significantly affects someone comes out, the disclosure duty applies. It reaches decisions your <em>vendors</em> make on your behalf, too, which is where most companies will be caught short.</p>
+      <p class="lede">You don't need a machine-learning model to be caught by this. A rules engine that declines an application, a tool that ranks job applicants, a system that decides who gets a payment plan. It reaches decisions your <em>vendors</em> make for you, too — which is where most companies get caught short.</p>
 
       <ol class="deliverables" style="margin-top:2.6rem">
         <li><strong>Find every in-scope system, including the ones you bought</strong><span>Your own code, your SaaS platforms, and anything a supplier runs for you. Procurement contracts rarely say. Someone has to ask.</span></li>
-        <li><strong>Decide what is actually in scope, and write down why</strong><span>The judgement calls are around &ldquo;substantially and directly related to making a decision&rdquo; and &ldquo;significantly affect&rdquo;. Getting them right matters less than having a defensible, documented reason for each call.</span></li>
+        <li><strong>Decide what is actually in scope, and write down why</strong><span>The judgement calls sit around &ldquo;substantially and directly related&rdquo; and &ldquo;significantly affect&rdquo;. Getting them right matters less than having a documented reason for each.</span></li>
         <li><strong>Draft the privacy policy disclosure</strong><span>The three things APP 1.8 requires: the kinds of personal information used, the kinds of decisions made solely by the program, and the kinds it substantially helps make. In plain English, because that is the point of the rule.</span></li>
         <li><strong>Leave behind a register you can maintain</strong><span>A forward-looking duty, not a one-off. Every new AI tool changes the answer, so it needs somewhere to live and someone who updates it.</span></li>
       </ol>
@@ -459,37 +479,37 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.8rem
     <div class="wrap">
       <p class="eyebrow">Free · no email · nothing sent anywhere</p>
       <h2>Don't take our word for it. Go and count.</h2>
-      <p class="check-lede">Six read-only numbers you can pull from your own tenant in about fifteen minutes. Put them in below and the arithmetic is done in front of you — every figure traceable to a number you supplied. If it comes back fine, you've spent fifteen minutes and learned something useful. That is a perfectly good outcome for us.</p>
+      <p class="check-lede">Six read-only numbers from your own tenant, fifteen minutes. The arithmetic happens in front of you, every figure traceable to something you supplied. If it comes back fine, that's a perfectly good outcome for us.</p>
 
       <div class="qpack">
         <div class="qitem">
           <div class="qitem-head"><span class="qnum">01</span><span class="qname">How many SharePoint sites do you have?</span></div>
-          <p class="qwhere">SharePoint admin centre → Sites → Active sites. The total at the top of the list. Include Teams-connected sites; every one of them is a document library.</p>
+          <p class="qwhere">SharePoint admin centre → Sites → Active sites. Include Teams-connected sites — every one is a document library.</p>
           <div class="qcode">Connect-SPOService -Url https://YOURTENANT-admin.sharepoint.com
 (Get-SPOSite -Limit All).Count</div>
         </div>
         <div class="qitem">
           <div class="qitem-head"><span class="qnum">02</span><span class="qname">How many have no sensitivity label?</span></div>
-          <p class="qwhere">Same list, add the Sensitivity column and sort. Unlabelled means nothing downstream — not DLP, not Restricted Content Discovery, not conditional access — can treat that site differently from the staff canteen menu.</p>
+          <p class="qwhere">Same list, add the Sensitivity column. Unlabelled means nothing downstream — not DLP, not Restricted Content Discovery — can tell that site apart from the canteen menu.</p>
           <div class="qcode">(Get-SPOSite -Limit All | Where-Object { -not $_.SensitivityLabel }).Count</div>
         </div>
         <div class="qitem">
           <div class="qitem-head"><span class="qnum">03</span><span class="qname">How many haven't been touched in six months?</span></div>
-          <p class="qwhere">Sort Active sites by Last activity. These are the dangerous ones: the project that ended, the acquisition that closed, the team that dissolved. Nobody owns them, nobody reviews them, and an assistant reads them exactly as eagerly as it reads today's work.</p>
+          <p class="qwhere">Sort by Last activity. The project that ended, the acquisition that closed, the team that dissolved. Nobody owns them, and an assistant reads them as eagerly as today's work.</p>
           <div class="qcode">(Get-SPOSite -Limit All | Where-Object {
   $_.LastContentModifiedDate -lt (Get-Date).AddDays(-180) }).Count</div>
         </div>
         <div class="qitem">
           <div class="qitem-head"><span class="qnum">04</span><span class="qname">How many live &ldquo;Anyone&rdquo; links are out there?</span></div>
-          <p class="qwhere">Microsoft 365 admin centre → Reports → Usage → SharePoint → Sharing, or the Purview activity explorer filtered to anonymous link creation. These are reachable with no login at all. If the number isn't zero, deal with it before you deal with anything else on this page.</p>
+          <p class="qwhere">Microsoft 365 admin centre → Reports → Usage → SharePoint → Sharing. Reachable with no login at all. If this isn't zero, deal with it before anything else on this page.</p>
         </div>
         <div class="qitem">
           <div class="qitem-head"><span class="qnum">05</span><span class="qname">How many licensed users?</span></div>
-          <p class="qwhere">Microsoft 365 admin centre → Billing → Licences. Use the number of people who can actually sign in and ask a question.</p>
+          <p class="qwhere">Microsoft 365 admin centre → Billing → Licences. Everyone who can sign in and ask a question.</p>
         </div>
         <div class="qitem">
           <div class="qitem-head"><span class="qnum">06</span><span class="qname">Roughly how many files per site?</span></div>
-          <p class="qwhere">SharePoint admin centre → Sites shows storage used per site; a reasonable working figure for most tenants is 800–2,000. If you have no idea, leave the default. The output scales linearly with this, so it's the one number worth checking rather than guessing.</p>
+          <p class="qwhere">Most tenants land between 800 and 2,000. The output scales linearly with this, so it's the one worth checking rather than guessing.</p>
         </div>
       </div>
 
@@ -517,31 +537,31 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.8rem
     <div class="wrap">
       <p class="eyebrow">How the work runs</p>
       <h2>Assess, fix, certify, sustain. Take one phase or all four.</h2>
-      <p class="lede">Each phase is priced separately and stands on its own. You can take the findings to your own engineers after phase one and never speak to us again — that's a legitimate outcome, and it's why the report is written to be handed over.</p>
+      <p class="lede">Each phase is priced separately. Take the findings to your own engineers after phase one and never speak to us again — that's a legitimate outcome, and it's why the report is written to be handed over.</p>
 
       <div class="phase-grid">
         <div class="phase">
           <span class="phase-n">Phase 01</span>
           <h3>Assess</h3>
-          <p>The exposure assessment below, or a full control-by-control readiness assessment against ISO 27001, SOC 2 or ISO 42001. Both produce a costed, sequenced plan rather than a colour-coded dashboard.</p>
+          <p>The exposure assessment below, or a control-by-control readiness assessment against ISO 27001, SOC 2 or ISO 42001. Both produce a costed, sequenced plan rather than a dashboard.</p>
           <p class="phase-fee">2–4 weeks · fixed fee</p>
         </div>
         <div class="phase">
           <span class="phase-n">Phase 02</span>
           <h3>Remediate</h3>
-          <p>The actual fixing. Labels designed and rolled out, over-shared sites closed, anonymous links killed, policies written to your operating reality, logging stood up. Hands on the console, not advice about consoles.</p>
+          <p>Labels designed and rolled out, over-shared sites closed, anonymous links killed, logging stood up. Hands on the console, not advice about consoles.</p>
           <p class="phase-fee">Fixed-price sprint · scoped and quoted from the assessment</p>
         </div>
         <div class="phase">
           <span class="phase-n">Phase 03</span>
           <h3>Certify</h3>
-          <p>Auditor selection and briefing, evidence package assembly, managing the request list through fieldwork, and translating findings before they turn into surprises.</p>
+          <p>Auditor selection and briefing, evidence assembly, managing the request list through fieldwork, and translating findings before they become surprises.</p>
           <p class="phase-fee">Through the audit cycle · monthly retainer</p>
         </div>
         <div class="phase">
           <span class="phase-n">Phase 04</span>
           <h3>Sustain</h3>
-          <p>Certification is annual and AI governance is continuous. Access reviews, register upkeep, new-tool approvals, internal audit and surveillance prep, so year two isn't another scramble.</p>
+          <p>Certification is annual, AI governance continuous. Access reviews, register upkeep, new-tool approvals and surveillance prep, so year two isn't another scramble.</p>
           <p class="phase-fee">From AUD 3,000/month</p>
         </div>
       </div>
@@ -563,10 +583,10 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.8rem
         </div>
 
         <ol class="deliverables">
-          <li><strong>Exposure register</strong><span>Ranked findings, each naming the content, who can reach it, and how they came to be able to — inherited permission, open link, orphaned site or explicit grant. That distinction is what decides how it gets fixed and how long it takes.</span></li>
+          <li><strong>Exposure register</strong><span>Ranked findings naming the content, who can reach it, and how — inherited permission, open link, orphaned site or explicit grant. That distinction decides how it gets fixed.</span></li>
           <li><strong>Blast radius by role</strong><span>What a new starter in sales could retrieve on day one, versus a contractor, versus someone who left finance three years ago and kept the group membership.</span></li>
-          <li><strong>Remediation plan, priced</strong><span>Written against your actual tenant and licence tier, sequenced so the largest reduction in exposure happens first, with an hours estimate against each item. It doubles as the quote if you want us to do it.</span></li>
-          <li><strong>Governance pack</strong><span>Acceptable-use position, an approval path for new AI tools, and the logging you'll need to answer &ldquo;who asked it what&rdquo; later. This is also the first evidence in an ISO 42001 or ISO 27001 file, so the work counts twice.</span></li>
+          <li><strong>Remediation plan, priced</strong><span>Written against your tenant and licence tier, sequenced so the biggest reduction comes first, hours estimated per item. It doubles as the quote.</span></li>
+          <li><strong>Governance pack</strong><span>Acceptable-use position, an approval path for new tools, and the logging to answer &ldquo;who asked it what&rdquo; later. Also the first evidence in an ISO 42001 file, so it counts twice.</span></li>
         </ol>
       </div>
 
@@ -587,7 +607,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.8rem
       <div class="fwlist">
         <div class="fwrow">
           <h3>ISO/IEC 42001</h3>
-          <p>The first certifiable AI management standard, adopted here as AS ISO/IEC 42001. What turns &ldquo;we're careful with AI&rdquo; into something a customer or a board can be shown. Certifications are still uncommon and accredited auditors are scarce, which is exactly why being early is worth something in a tender.</p>
+          <p>The first certifiable AI management standard, adopted here as AS ISO/IEC 42001. Turns &ldquo;we're careful with AI&rdquo; into something a board can be shown. Certifications are still rare and auditors scarce, which is why being early is worth something in a tender.</p>
         </div>
         <div class="fwrow">
           <h3>ISO/IEC 27001:2022</h3>
@@ -599,7 +619,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.8rem
         </div>
         <div class="fwrow">
           <h3>Essential Eight &amp; the ASD guidance</h3>
-          <p>Still the baseline insurers, tenders and assessors measure against. We assess against the current maturity model and build the uplift so it carries forward rather than becoming work you redo.</p>
+          <p>Still what insurers, tenders and assessors measure against. We assess against the current maturity model and build uplift that carries forward rather than becoming work you redo.</p>
         </div>
         <div class="fwrow">
           <h3>APRA CPS 234 &amp; CPS 230</h3>
@@ -607,7 +627,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.8rem
         </div>
         <div class="fwrow">
           <h3>Privacy Act &amp; NZ Privacy Act 2020</h3>
-          <p>APP 1.7 automated decision disclosure, the Notifiable Data Breaches scheme, and the statutory tort of serious invasion of privacy that has been live since June 2025. Plus NIST AI RMF and the EU AI Act where you sell into Europe.</p>
+          <p>APP 1.7 disclosure, the Notifiable Data Breaches scheme, and the statutory tort of serious invasion of privacy live since June 2025. Plus NIST AI RMF and the EU AI Act if you sell into Europe.</p>
         </div>
       </div>
     </div>
@@ -623,12 +643,12 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.8rem
         <div class="phase">
           <span class="phase-n">01</span>
           <h3>Engineering time</h3>
-          <p>A first certification typically absorbs a third to a half of a senior engineer for four to six months, plus a manager coordinating it. That's a feature you didn't ship, paid for at your most expensive internal rate.</p>
+          <p>A first certification absorbs a third to a half of a senior engineer for four to six months, plus a manager. That's a feature you didn't ship, at your most expensive internal rate.</p>
         </div>
         <div class="phase">
           <span class="phase-n">02</span>
           <h3>Learning on the clock</h3>
-          <p>Nobody internally has done it before, so the first attempt is also the training run. Scoping errors and misread controls surface during fieldwork, which is the most expensive possible moment to find them.</p>
+          <p>The first attempt is also the training run. Scoping errors surface during fieldwork, which is the most expensive possible moment to find them.</p>
         </div>
         <div class="phase">
           <span class="phase-n">03</span>
@@ -638,7 +658,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.8rem
         <div class="phase">
           <span class="phase-n">04</span>
           <h3>It comes back every year</h3>
-          <p>ISO 27001 brings annual surveillance audits and recertification every three years; SOC 2 needs a fresh report each year. Access reviews, register upkeep and incident exercises run on a cycle, indefinitely.</p>
+          <p>ISO 27001 brings annual surveillance audits and recertification every three years; SOC 2 needs a fresh report each year. Access reviews and register upkeep run indefinitely.</p>
         </div>
       </div>
     </div>
@@ -653,11 +673,11 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.8rem
         <li><strong>Weeks 1–4 · Readiness assessment</strong><span>Where you find out what you're actually working with.</span></li>
         <li><strong>Months 2–5 · Remediation</strong><span>Policies written, controls implemented, tooling configured, and — the part teams underestimate — controls operated long enough to leave a trail.</span></li>
         <li><strong>Month 5 · Auditor selection and Type 1</strong><span>A point-in-time report you can put in front of a customer while the clock runs on Type 2.</span></li>
-        <li><strong>Months 5–11 · Observation window</strong><span>Three to six months minimum in which your controls must demonstrably operate. It cannot be shortened, bought or backdated. This is the step nobody mentions.</span></li>
+        <li><strong>Months 5–11 · Observation window</strong><span>Three to six months in which your controls must demonstrably operate. It cannot be shortened, bought or backdated. The step nobody mentions.</span></li>
         <li><strong>Months 11–12 · Fieldwork and report</strong><span>The auditor tests your evidence and issues the report your customer asked for.</span></li>
       </ol>
 
-      <p class="check-lede" style="margin-top:2.2rem">If a deal depends on a date, you need this map before you promise one. Working it out early is usually the difference between a Type 1 that holds the customer and a commitment you can't meet.</p>
+      <p class="check-lede" style="margin-top:2.2rem">If a deal depends on a date, you need this map before you promise one — usually the difference between a Type 1 that holds the customer and a commitment you can't meet.</p>
     </div>
   </section>
 
@@ -667,7 +687,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.8rem
         <div>
           <p class="eyebrow">Who you'd be working with</p>
           <h2>Senior practitioners only. No graduates learning on your engagement.</h2>
-          <p class="lede">The work is done by people who have run security operations for an Australian technology and managed services firm serving financial services clients, and carried that organisation through ISO 27001 certification and a SOC 2 Type 2 audit with an external auditor. Not a methodology learned from a course.</p>
+          <p class="lede">The work is done by people who have run security operations for an Australian technology firm serving financial services clients, and carried it through ISO 27001 certification and a SOC 2 Type 2 audit. Not a methodology learned from a course.</p>
           <div class="offer-spec">
             <dl>
               <dt>Market</dt><dd>Australia and New Zealand</dd>
@@ -679,11 +699,11 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.8rem
         </div>
 
         <ol class="deliverables">
-          <li><strong>We have sat on your side of the table</strong><span>Assembling evidence across a dozen cloud subscriptions, chasing engineering teams with shipping deadlines of their own, and answering an auditor who wants the thing itself rather than a description of it. We know which findings are genuinely hard and which look alarming in a report but take an afternoon.</span></li>
+          <li><strong>We have sat on your side of the table</strong><span>Chasing engineering teams with deadlines of their own, and answering an auditor who wants the thing itself rather than a description of it. We know which findings are genuinely hard and which just look alarming.</span></li>
           <li><strong>We still build</strong><span>Remediation here means configuring the tenant, writing the detection and fixing the pipeline — not handing you a spreadsheet and wishing you luck.</span></li>
-          <li><strong>Named associates, never quiet subcontracting</strong><span>For penetration testing, privacy law or New Zealand government frameworks we bring in independent practitioners from a small network, and you're told who they are before they start.</span></li>
-          <li><strong>The same person start to finish</strong><span>Whoever assesses you fixes it and sits with you through the audit. Nothing is handed to a delivery pool once the proposal is signed, which is why we take on a small number of clients at a time.</span></li>
-          <li><strong>Certifications behind the work</strong><span>Microsoft AZ-500, SC-100 and AZ-305. AWS Solutions Architect and Security Specialty. ISO 27001:2022 lead implementation. Security operations leadership across Defender, Sentinel, Entra ID, Purview and Netskope.</span></li>
+          <li><strong>Named associates, never quiet subcontracting</strong><span>For penetration testing, privacy law or NZ government frameworks we bring in independent practitioners, and you're told who they are before they start.</span></li>
+          <li><strong>The same person start to finish</strong><span>Whoever assesses you fixes it and sits with you through the audit. Nothing is handed to a delivery pool once the proposal is signed.</span></li>
+          <li><strong>Certifications behind the work</strong><span>Microsoft AZ-500, SC-100, AZ-305. AWS Solutions Architect and Security Specialty. ISO 27001:2022 lead implementer. Defender, Sentinel, Entra ID, Purview, Netskope.</span></li>
         </ol>
       </div>
     </div>
@@ -698,55 +718,51 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.8rem
         <details>
           <summary>Why would we give a stranger read access to everything we own?</summary>
           <div class="faq-body">
-            <p>You shouldn't, and the engagement is designed so you don't have to trust us to start. Access is read-only, scoped to the directories and services in the statement of work, granted through your own conditional access, time-boxed to the ten days, and revoked on delivery. You can watch every call we make in your own audit log — we'll tell you which log and how to read it on day one.</p>
-            <p>We carry professional indemnity and cyber liability cover, we'll sign your NDA rather than ours, and the exposure register lives in your tenant, not ours. If you'd rather we never touch the environment, there is a version where your admin runs our scripts and hands us the output. It's slower and slightly less accurate, and about a third of clients choose it.</p>
+            <p>You shouldn't have to trust us to start. Access is read-only, scoped in the statement of work, granted through your own conditional access, time-boxed, and revoked on delivery — and every call we make appears in your audit log. We sign your NDA, not ours, and the register lives in your tenant.</p>
+            <p>If you'd rather we never touch the environment, your admin can run our scripts and hand us the output. About a third of clients choose that.</p>
           </div>
         </details>
         <details>
           <summary>Can't you just give us software we install, like Microsoft does?</summary>
           <div class="faq-body">
-            <p>Not honestly, no — and anyone who says otherwise is selling you a dashboard. The controls that stop an assistant surfacing the wrong thing live inside the platform you already own. In Microsoft 365 that's Purview labelling, Restricted Access Control and sharing policy. In Google Workspace it's Drive labels, DLP and shared-drive membership. Different levers, different order, different failure modes.</p>
+            <p>Not honestly — anyone who says otherwise is selling you a dashboard. The controls live inside the platform you already own: Purview labelling and Restricted Access Control in Microsoft 365, Drive labels and DLP in Google Workspace. Different levers, different failure modes. What we make repeatable is the assessment.</p>
           </div>
         </details>
         <details>
           <summary>We already turned Copilot on. Is it too late?</summary>
           <div class="faq-body">
-            <p>No, and it's the more common situation. Nothing has necessarily gone wrong — but you now have a live retrieval surface over your entire content estate and usually no record of what has been asked or returned.</p>
-            <p>The assessment is the same with two additions: we read the interaction logs you already hold to see what has actually been retrieved, and we sequence remediation so the highest-exposure content closes first rather than doing a tidy alphabetical sweep.</p>
+            <p>No — it's the more common situation. You now have a live retrieval surface over your whole estate and usually no record of what's been asked. The assessment adds two things: we read the interaction logs you already hold, and we close the highest-exposure content first.</p>
           </div>
         </details>
         <details>
           <summary>Are we really in scope for APP 1.7? We don't use AI for decisions.</summary>
           <div class="faq-body">
-            <p>Possibly not — and finding that out and documenting the reasoning is itself the deliverable. But the rule is written around &ldquo;a computer program&rdquo;, not around AI, and it captures decisions a program substantially and directly helps make, not only ones it makes alone. Credit or eligibility scoring, application triage, rostering that affects pay, automated account suspension, fraud flags that block a transaction, applicant ranking — none of these need a model to be caught.</p>
-            <p>The part that catches most companies is that it reaches arrangements where a supplier's program makes the decision for you. Your privacy policy has to describe that too, and your contracts usually don't give you the visibility to describe it accurately.</p>
+            <p>Possibly not — and documenting that reasoning is itself the deliverable. But the rule says &ldquo;computer program&rdquo;, not AI, and covers decisions a program substantially helps make. Credit scoring, application triage, rostering that affects pay, fraud flags, applicant ranking: none need a model.</p>
+            <p>What catches most companies is that it reaches decisions a supplier's program makes for you — and your contracts rarely give you the visibility to describe those accurately.</p>
           </div>
         </details>
         <details>
           <summary>We already bought a compliance platform. Do we still need you?</summary>
           <div class="faq-body">
-            <p>Vanta, Drata and Sprinto are good at watching controls you've already built and collecting evidence from them automatically. They aren't good at deciding what your controls should be, writing policies that match how your company actually works, or configuring the underlying systems so the checks go green for real reasons.</p>
-            <p>Most teams who stall have a platform showing 60% and no idea which of the remaining 40% is a five-minute fix and which is three months of work. That gap is the job.</p>
+            <p>Vanta, Drata and Sprinto watch controls you've already built. They don't decide what those controls should be, write policies that match your business, or configure the systems so the checks go green for real reasons. Most teams who stall sit at 60% with no idea which of the remaining 40% is an afternoon and which is three months. That gap is the job.</p>
           </div>
         </details>
         <details>
           <summary>Can you work with the auditor we've already chosen?</summary>
           <div class="faq-body">
-            <p>Yes, and it's the normal arrangement. We're not auditors and don't issue reports, so there's no independence question — we sit on your side and manage the relationship, the request list and the findings.</p>
+            <p>Yes — the normal arrangement. We're not auditors and don't issue reports, so there's no independence question. We sit on your side and manage the relationship, the request list and the findings. If you haven't picked one, we'll shortlist firms that suit your size rather than price for enterprise.</p>
           </div>
         </details>
         <details>
           <summary>Can you do an IRAP assessment?</summary>
           <div class="faq-body">
-            <p>No. IRAP assessments must be performed by an ASD-endorsed assessor and we don't hold that endorsement. Anyone telling you otherwise is worth a second look.</p>
-            <p>We can get you ready for one, and help you close what the assessor finds.</p>
+            <p>No. IRAP assessments must be performed by an ASD-endorsed assessor and we don't hold that endorsement — anyone telling you otherwise is worth a second look. We can get you ready for one and help you close what the assessor finds.</p>
           </div>
         </details>
         <details>
           <summary>What does the whole thing cost, end to end?</summary>
           <div class="faq-body">
-            <p>For a company of 20 to 100 people with a reasonably modern cloud stack, budget roughly AUD 50,000 to 90,000 across a first SOC 2 Type 2 or ISO 27001 cycle. That covers assessment, remediation support, auditor fees and tooling — not just our fees.</p>
-            <p>The AI exposure work is far smaller: AUD 6,500 for the assessment, and a fixed-price remediation sprint quoted from what the register actually turns up. You get a specific number before you commit to anything.</p>
+            <p>For 20 to 100 people on a modern cloud stack, budget AUD 50,000 to 90,000 across a first SOC 2 Type 2 or ISO 27001 cycle — including auditor fees and tooling, not just ours. The AI exposure work is far smaller: AUD 6,500, then a fixed-price remediation sprint quoted from the register. You get a number before you commit.</p>
           </div>
         </details>
       </div>
@@ -759,7 +775,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.8rem
         <div>
           <p class="eyebrow">Next step</p>
           <h2>Thirty minutes. You'll get a straight answer on scope and timing either way.</h2>
-          <p class="contact-say">Tell us what's been asked of you and by when. If we're not the right fit we'll say so and point you somewhere better — that costs us half an hour and saves you a month.</p>
+          <p class="contact-say">Tell us what's been asked of you and by when. If we're not the right fit we'll say so and point you somewhere better.</p>
           <div class="contact-lines">
             <p><span class="cl-label">Email</span><a href="mailto:hello@z3roday.com">hello@z3roday.com</a></p>
             <p><span class="cl-label">Phone</span><a href="tel:+61420814130">+61 420 814 130</a></p>
@@ -807,7 +823,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.8rem
             </div>
             <p class="field-hidden"><label>Leave this empty<input name="_gotcha" type="text" tabindex="-1" autocomplete="off"></label></p>
             <button class="btn btn-solid" type="submit" id="sendBtn">Send enquiry</button>
-            <p class="form-note" id="formNote">Goes straight to a person, usually answered within one business day. Please don't include confidential or security-sensitive detail in this form — we'll set up a secure channel on the first call. See our <a href="/privacy">privacy statement</a>.</p>
+            <p class="form-note" id="formNote">Goes to a person, answered within one business day. Don't include security-sensitive detail here — we'll set up a secure channel on the first call. See our <a href="/privacy">privacy statement</a>.</p>
           </form>
         </div>
       </div>
@@ -825,6 +841,66 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.8rem
 
 <script>
 (function(){
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if(!reduce) document.documentElement.classList.add("js");
+
+  /* ---- number count-up ---- */
+  function countUp(el, to, ms, suffix){
+    if(reduce){ el.textContent = to.toLocaleString("en-AU") + (suffix||""); return; }
+    var t0 = null;
+    function step(ts){
+      if(!t0) t0 = ts;
+      var k = Math.min((ts - t0) / ms, 1);
+      var eased = 1 - Math.pow(1 - k, 3);
+      el.textContent = Math.round(to * eased).toLocaleString("en-AU") + (suffix||"");
+      if(k < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
+  /* ---- scroll reveal ---- */
+  var revealSel = ".band .eyebrow, .band h2, .band .lede, .fw, .phase, .fwrow, " +
+                  ".deliverables li, .gaprow, .qitem, .faq details, .offer-spec, " +
+                  ".guarantee, .check .eyebrow, .check h2, .check-lede, .gap-title, " +
+                  ".gap-foot, .contact-grid > div, .calc-fields, .calc-out";
+  var nodes = Array.prototype.slice.call(document.querySelectorAll(revealSel));
+  if(!reduce && "IntersectionObserver" in window){
+    nodes.forEach(function(n){ n.classList.add("reveal"); });
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(!e.isIntersecting) return;
+        var sibs = Array.prototype.slice.call(e.target.parentNode.children)
+                    .filter(function(c){ return c.classList.contains("reveal"); });
+        var i = Math.min(sibs.indexOf(e.target), 5);
+        e.target.style.transitionDelay = (i > 0 ? i * 70 : 0) + "ms";
+        e.target.classList.add("in");
+        io.unobserve(e.target);
+      });
+    }, { rootMargin: "0px 0px -12% 0px", threshold: 0.08 });
+    nodes.forEach(function(n){ io.observe(n); });
+
+    /* bars fill when the chart comes into view */
+    var gap = document.querySelector(".gap");
+    if(gap){
+      var gio = new IntersectionObserver(function(es){
+        es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add("in"); gio.unobserve(e.target); } });
+      }, { threshold: 0.35 });
+      gio.observe(gap);
+    }
+  }
+
+  /* ---- hero: run the scan ---- */
+  var ledger = document.getElementById("ledger");
+  if(ledger){
+    var rows = ledger.querySelectorAll(".lrow");
+    for(var r = 0; r < rows.length; r++){
+      rows[r].style.animationDelay = (260 + r * 105) + "ms";
+    }
+    setTimeout(function(){ ledger.classList.add("scanning"); }, 220);
+    var fc = document.getElementById("findCount");
+    if(fc) setTimeout(function(){ countUp(fc, 3412, 1500); }, 260);
+  }
+
   /* ---- countdown to APP 1.7 ---- */
   var el = document.getElementById("countdown");
   if(el){
@@ -833,7 +909,8 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.8rem
     today.setHours(0,0,0,0);
     var days = Math.round((target - today) / 86400000);
     if(days > 0){
-      el.innerHTML = days + '<small>days to APP 1.7</small>';
+      el.innerHTML = '<span id="cdNum">0</span><small>days to APP 1.7</small>';
+      countUp(document.getElementById("cdNum"), days, 1100);
     } else if(days === 0){
       el.innerHTML = 'Today<small>APP 1.7 commences</small>';
     } else {
@@ -939,12 +1016,30 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.8rem
     });
   }
 
+  var firstPaint = true;
   ids.forEach(function(id){
     var f = document.getElementById(id);
     f.addEventListener("input", render);
     f.addEventListener("change", render);
   });
   render();
+  if(!reduce){
+    var co = document.getElementById("calcOut");
+    var cio = new IntersectionObserver(function(es){
+      es.forEach(function(e){
+        if(!e.isIntersecting || !firstPaint) return;
+        firstPaint = false;
+        e.target.querySelectorAll(".co-v").forEach(function(v){
+          var raw = v.textContent.trim();
+          var pct = raw.indexOf("%") > -1;
+          var num = parseInt(raw.replace(/[^0-9]/g, ""), 10);
+          if(!isNaN(num)) countUp(v, num, 900, pct ? "%" : "");
+        });
+        cio.unobserve(e.target);
+      });
+    }, { threshold: 0.3 });
+    if(co) cio.observe(co);
+  }
 })();
 </script>
 
