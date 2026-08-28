@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Certification &amp; privacy law — ISO 27001, SOC 2, ISO 42001 and APP 1.7 — z3roday</title>
+<meta name="description" content="ISO 27001, SOC 2, ISO 42001, Essential Eight and APRA readiness, plus the APP 1.7 automated-decision disclosure due 10 December 2026. For companies in Australia and New Zealand.">
+<meta name="theme-color" content="#16233A">
+<link rel="canonical" href="https://z3roday.com/compliance">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Archivo+Expanded:wght@600;700&family=IBM+Plex+Mono:wght@400;500;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<style>
+
+:root{
+  --ink:#16233A;
+  --paper:#EDEFF2;
+  --paper-deep:#E1E5EA;
+  --card:#F7F8F9;
+  --pass:#4A6B57;
+  --gap:#B5761F;
+  --miss:#8C3A2B;
+  --mute:#6B7480;
+  --rule:rgba(22,35,58,.14);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:"Source Serif 4",Georgia,serif;font-size:1.0625rem;line-height:1.65;-webkit-font-smoothing:antialiased}
+.wrap{width:100%;max-width:74rem;margin:0 auto;padding:0 1.75rem}
+h1,h2,h3{font-family:"Archivo Expanded","Archivo",system-ui,sans-serif;font-weight:700;letter-spacing:-.015em;line-height:1.05;margin:0}
+.eyebrow{font-family:"IBM Plex Mono",monospace;font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--mute);margin:0 0 1.1rem}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--pass);outline-offset:3px;border-radius:2px}
+
+.masthead{border-bottom:1px solid var(--rule)}
+.masthead .wrap{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding-top:1.4rem;padding-bottom:1.4rem}
+.mark{font-family:"IBM Plex Mono",monospace;font-weight:700;font-size:1.05rem;letter-spacing:-.02em;text-decoration:none;display:block;line-height:1.1}
+.markblock{display:flex;flex-direction:column;gap:.3rem}
+.mark-sub{font-family:"IBM Plex Mono",monospace;font-size:.6rem;letter-spacing:.11em;text-transform:uppercase;color:var(--mute);line-height:1}
+@media(max-width:520px){.mark-sub{display:none}}
+.mark span{color:var(--pass)}
+.masthead nav{display:flex;gap:1.5rem;font-family:"Archivo",sans-serif;font-size:.84rem;font-weight:500}
+.masthead nav a{text-decoration:none;color:var(--mute)}
+.masthead nav a:hover{color:var(--ink)}
+@media(max-width:860px){.masthead nav{display:none}}
+
+/* hero */
+.hero{padding:5.5rem 0 4.5rem}
+.hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:4.5rem;align-items:start}
+.hero h1{font-size:clamp(2.1rem,4.4vw,3.4rem)}
+.hero h1 em{font-style:normal;color:var(--pass)}
+.hero-sub{font-size:1.2rem;margin:1.6rem 0 0;max-width:36ch;color:#2C3A54}
+.hero-actions{display:flex;flex-wrap:wrap;gap:.9rem;margin-top:2.4rem}
+.btn{font-family:"Archivo",sans-serif;font-weight:600;font-size:.92rem;padding:.85rem 1.5rem;text-decoration:none;display:inline-block;border:1px solid var(--ink);cursor:pointer}
+.btn-solid{background:var(--ink);color:var(--paper)}
+.btn-solid:hover{background:#0D1729}
+.btn-ghost{background:transparent;color:var(--ink)}
+.btn-ghost:hover{background:var(--paper-deep)}
+
+/* ledger device */
+.ledger{background:var(--card);border:1px solid var(--rule)}
+.ledger-head{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;padding:1rem 1.25rem;border-bottom:1px solid var(--rule)}
+.ledger-title{font-family:"Archivo",sans-serif;font-weight:600;font-size:.8rem}
+.ledger-meta{font-family:"IBM Plex Mono",monospace;font-size:.68rem;color:var(--mute)}
+.lrow{display:grid;grid-template-columns:5.4rem 1fr auto;gap:.9rem;align-items:baseline;padding:.72rem 1.25rem;border-bottom:1px solid rgba(22,35,58,.07)}
+.ref{font-family:"IBM Plex Mono",monospace;font-size:.76rem;color:var(--mute)}
+.ctl{font-family:"Archivo",sans-serif;font-size:.86rem;font-weight:500}
+.status{font-family:"IBM Plex Mono",monospace;font-size:.68rem;letter-spacing:.09em;text-transform:uppercase;white-space:nowrap}
+.s-ready{color:var(--pass)}
+.s-gap{color:var(--gap)}
+.s-missing{color:var(--miss)}
+.ledger-foot{padding:.85rem 1.25rem;border-top:1px solid var(--rule);font-family:"IBM Plex Mono",monospace;font-size:.68rem;color:var(--mute)}
+@media(prefers-reduced-motion:no-preference){
+  .hero .lrow{opacity:0;transform:translateY(5px);animation:rise .5s ease forwards}
+  .hero .lrow:nth-of-type(1){animation-delay:.10s}.hero .lrow:nth-of-type(2){animation-delay:.17s}
+  .hero .lrow:nth-of-type(3){animation-delay:.24s}.hero .lrow:nth-of-type(4){animation-delay:.31s}
+  .hero .lrow:nth-of-type(5){animation-delay:.38s}.hero .lrow:nth-of-type(6){animation-delay:.45s}
+  .hero .lrow:nth-of-type(7){animation-delay:.52s}
+}
+@keyframes rise{to{opacity:1;transform:none}}
+@media(max-width:900px){.hero{padding:3.5rem 0 3rem}.hero .wrap{grid-template-columns:1fr;gap:3rem}}
+
+/* bands */
+.band{padding:5rem 0;border-top:1px solid var(--rule)}
+.band-dark{background:var(--ink);color:var(--paper);border-top:0}
+.band-dark .eyebrow{color:rgba(237,239,242,.55)}
+.band-dark .lede{color:rgba(237,239,242,.85)}
+.band-dark .deliverables li{border-bottom-color:rgba(237,239,242,.16)}
+.band-dark .deliverables li:first-child{border-top-color:rgba(237,239,242,.16)}
+.band-dark .deliverables li::before{color:#E0A855}
+.band-dark .deliverables span{color:rgba(237,239,242,.78)}
+.check .deliverables li{border-bottom-color:rgba(237,239,242,.16)}
+.check .deliverables li:first-child{border-top-color:rgba(237,239,242,.16)}
+.check .deliverables span{color:rgba(237,239,242,.78)}
+.band h2{font-size:clamp(1.5rem,2.6vw,2.05rem);max-width:22ch}
+.lede{font-size:1.15rem;max-width:58ch;margin:1.5rem 0 0}
+
+/* frameworks */
+.fw-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:0;margin-top:2.8rem;border-top:1px solid var(--rule)}
+.fw{border-bottom:1px solid var(--rule);padding:1.7rem 2rem 1.7rem 0}
+.fw:nth-child(odd){border-right:1px solid var(--rule);padding-right:2rem}
+.fw:nth-child(even){padding-left:2rem}
+.fw-tag{font-family:"IBM Plex Mono",monospace;font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;color:var(--pass);display:block;margin-bottom:.5rem}
+.fw h3{font-family:"Archivo",sans-serif;font-size:1.05rem;font-weight:600;letter-spacing:0;margin-bottom:.45rem}
+.fw p{margin:0;font-size:.95rem;color:#2C3A54;max-width:46ch}
+.fw-also{margin-top:2rem;font-size:.95rem;color:var(--mute);max-width:62ch}
+@media(max-width:820px){
+  .fw-grid{grid-template-columns:1fr}
+  .fw:nth-child(odd){border-right:0;padding-right:0}
+  .fw:nth-child(even){padding-left:0}
+}
+
+/* phases */
+.phase-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.6rem;margin-top:3rem}
+.phase{border-top:2px solid var(--ink);padding-top:1.1rem}
+.phase-n{font-family:"IBM Plex Mono",monospace;font-size:.68rem;letter-spacing:.1em;color:var(--pass);display:block;margin-bottom:.6rem}
+.phase h3{font-family:"Archivo",sans-serif;font-size:1.02rem;font-weight:600;letter-spacing:0;margin-bottom:.5rem}
+.phase p{margin:0 0 .8rem;font-size:.93rem;color:#2C3A54}
+.phase-fee{font-family:"IBM Plex Mono",monospace;font-size:.68rem;color:var(--mute)}
+@media(max-width:900px){.phase-grid{grid-template-columns:repeat(2,1fr);gap:1.8rem}}
+@media(max-width:560px){.phase-grid{grid-template-columns:1fr}}
+
+/* deliverables */
+.offer{display:grid;grid-template-columns:1fr 1.35fr;gap:4rem;align-items:start}
+.offer-spec{border-left:2px solid var(--pass);padding-left:1.4rem;margin-top:2rem}
+.offer-spec dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:.45rem 1.4rem;font-size:.92rem}
+.offer-spec dt{font-family:"IBM Plex Mono",monospace;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);padding-top:.3em}
+.offer-spec dd{margin:0;font-family:"Archivo",sans-serif;font-weight:500}
+.deliverables{list-style:none;margin:0;padding:0;counter-reset:d}
+.deliverables li{counter-increment:d;padding:1.15rem 0 1.15rem 3.2rem;border-bottom:1px solid var(--rule);position:relative}
+.deliverables li:first-child{border-top:1px solid var(--rule)}
+.deliverables li::before{content:counter(d,decimal-leading-zero);position:absolute;left:0;top:1.35rem;font-family:"IBM Plex Mono",monospace;font-size:.7rem;color:var(--pass)}
+.deliverables strong{display:block;font-family:"Archivo",sans-serif;font-size:.98rem;font-weight:600;margin-bottom:.25rem}
+.deliverables span{font-size:.95rem;color:#2C3A54}
+@media(max-width:900px){.offer{grid-template-columns:1fr;gap:2.5rem}}
+
+/* checker */
+.check{background:var(--ink);color:var(--paper);padding:5rem 0}
+.check .eyebrow{color:rgba(237,239,242,.55)}
+.check h2{max-width:24ch}
+.check-lede{font-size:1.1rem;max-width:54ch;margin:1.4rem 0 0;color:rgba(237,239,242,.82)}
+.q-list{margin:3rem 0 0;border-top:1px solid rgba(237,239,242,.2)}
+.q{display:grid;grid-template-columns:1fr 15rem;gap:1.5rem;align-items:center;padding:1.15rem 0;border-bottom:1px solid rgba(237,239,242,.16)}
+.q-text{font-size:1rem;max-width:52ch}
+.q-ref{font-family:"IBM Plex Mono",monospace;font-size:.66rem;color:rgba(237,239,242,.45);display:block;margin-top:.3rem;letter-spacing:.06em}
+.opts{display:flex;gap:.4rem}
+.opts label{flex:1;text-align:center;font-family:"Archivo",sans-serif;font-size:.78rem;font-weight:600;padding:.5rem .3rem;border:1px solid rgba(237,239,242,.3);cursor:pointer;user-select:none}
+.opts input{position:absolute;opacity:0;width:0;height:0}
+.opts input:checked + span{color:var(--ink)}
+.opts label:has(input:checked){background:var(--paper);color:var(--ink);border-color:var(--paper)}
+.opts label:has(input:focus-visible){outline:2px solid #E0A855;outline-offset:2px}
+.check-actions{margin-top:2rem;display:flex;gap:.9rem;flex-wrap:wrap;align-items:center}
+.btn-light{background:var(--paper);color:var(--ink);border-color:var(--paper)}
+.btn-light:hover{background:#fff}
+.btn-outline{background:transparent;color:var(--paper);border-color:rgba(237,239,242,.45)}
+.btn-outline:hover{border-color:var(--paper)}
+.check-note{font-family:"IBM Plex Mono",monospace;font-size:.66rem;color:rgba(237,239,242,.5)}
+.result{margin-top:2.6rem;display:none}
+.result.is-shown{display:block}
+.result-head{display:flex;flex-wrap:wrap;gap:2.5rem;padding-bottom:1.6rem;border-bottom:1px solid rgba(237,239,242,.2)}
+.result-figure{font-family:"Archivo Expanded",sans-serif;font-weight:700;font-size:2.2rem;line-height:1}
+.result-label{font-family:"IBM Plex Mono",monospace;font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(237,239,242,.55);margin-bottom:.5rem}
+.result-say{margin-top:1.5rem;font-size:1.05rem;max-width:56ch;color:rgba(237,239,242,.86)}
+.result-ledger{margin-top:1.8rem;background:rgba(237,239,242,.05);border:1px solid rgba(237,239,242,.2)}
+.result-ledger .ledger-head{border-bottom-color:rgba(237,239,242,.2)}
+.result-ledger .lrow{border-bottom-color:rgba(237,239,242,.12)}
+.result-ledger .ref{color:rgba(237,239,242,.5)}
+.result-ledger .s-gap{color:#E0A855}
+.result-ledger .s-missing{color:#E08C7A}
+@media(max-width:780px){.q{grid-template-columns:1fr;gap:.85rem}}
+
+
+/* in-house burden */
+.burden{display:grid;grid-template-columns:repeat(2,1fr);gap:0;margin-top:2.8rem;border-top:1px solid var(--rule)}
+.burden-item{border-bottom:1px solid var(--rule);padding:1.7rem 0}
+.burden-item:nth-child(odd){border-right:1px solid var(--rule);padding-right:2.2rem}
+.burden-item:nth-child(even){padding-left:2.2rem}
+.burden-label{font-family:"IBM Plex Mono",monospace;font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gap);display:block;margin-bottom:.6rem}
+.burden-item p{margin:0;font-size:.97rem;color:#2C3A54;max-width:46ch}
+.burden-close{margin-top:2.2rem;font-size:1.08rem;max-width:60ch}
+@media(max-width:820px){
+  .burden{grid-template-columns:1fr}
+  .burden-item:nth-child(odd){border-right:0;padding-right:0}
+  .burden-item:nth-child(even){padding-left:0}
+}
+
+/* timeline */
+.tl{margin-top:3.2rem;border-top:1px solid rgba(237,239,242,.2)}
+.tl-row{display:grid;grid-template-columns:7.5rem 1fr;gap:1.5rem;padding:1.3rem 0;border-bottom:1px solid rgba(237,239,242,.16)}
+.tl-when{font-family:"IBM Plex Mono",monospace;font-size:.72rem;letter-spacing:.08em;color:rgba(237,239,242,.6);padding-top:.2rem}
+.tl-what{font-family:"Archivo",sans-serif;font-weight:600;font-size:1rem}
+.tl-note{font-size:.95rem;color:rgba(237,239,242,.72);margin-top:.3rem;max-width:52ch}
+.tl-row.is-window{background:rgba(181,118,31,.13);margin:0 -1rem;padding-left:1rem;padding-right:1rem}
+.tl-row.is-window .tl-when{color:#E0A855}
+.tl-kicker{margin-top:2.4rem;font-size:1.05rem;max-width:56ch;color:rgba(237,239,242,.85)}
+@media(max-width:700px){.tl-row{grid-template-columns:1fr;gap:.35rem}}
+
+/* bio */
+.bio{display:grid;grid-template-columns:1.2fr 1fr;gap:4rem;align-items:start}
+.bio p{max-width:56ch}
+.creds{border:1px solid var(--rule);background:var(--card);padding:1.5rem}
+.creds h3{font-family:"IBM Plex Mono",monospace;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;font-weight:500;color:var(--mute);margin-bottom:1rem}
+.creds ul{list-style:none;margin:0;padding:0;font-size:.92rem}
+.creds li{padding:.5rem 0;border-bottom:1px solid rgba(22,35,58,.07);font-family:"Archivo",sans-serif;font-weight:500}
+.creds li:last-child{border-bottom:0}
+@media(max-width:900px){.bio{grid-template-columns:1fr;gap:2.5rem}}
+
+/* faq */
+.faq{margin-top:2.8rem;border-top:1px solid var(--rule)}
+.faq details{border-bottom:1px solid var(--rule)}
+.faq summary{font-family:"Archivo",sans-serif;font-weight:600;font-size:1rem;padding:1.25rem 2.5rem 1.25rem 0;cursor:pointer;list-style:none;position:relative}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";position:absolute;right:.4rem;top:1.1rem;font-family:"IBM Plex Mono",monospace;color:var(--pass);font-size:1.1rem}
+.faq details[open] summary::after{content:"–"}
+.faq-body{padding:0 0 1.4rem;font-size:.98rem;color:#2C3A54;max-width:62ch}
+.faq-body p{margin:0 0 .8rem}
+.faq-body p:last-child{margin-bottom:0}
+
+/* contact */
+.contact{padding:5.5rem 0}
+.contact h2{font-size:clamp(1.6rem,3vw,2.3rem);max-width:26ch}
+.contact-lines{margin-top:2.2rem;font-family:"IBM Plex Mono",monospace;font-size:.9rem}
+.contact-lines p{margin:.35rem 0}
+.contact-lines a{text-decoration:none;border-bottom:1px solid var(--pass)}
+.contact-lines a:hover{color:var(--pass)}
+
+/* contact */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start}
+.contact-say{font-size:1.05rem;max-width:44ch;margin:1.5rem 0 0}
+.contact-lines{margin-top:2.2rem;font-size:.92rem}
+.contact-lines p{margin:0;display:grid;grid-template-columns:5.5rem 1fr;gap:1rem;padding:.6rem 0;border-bottom:1px solid var(--rule)}
+.cl-label{font-family:"IBM Plex Mono",monospace;font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;color:var(--mute);padding-top:.28em}
+.contact-lines a{font-family:"Archivo",sans-serif;font-weight:500;text-decoration:none;border-bottom:1px solid var(--pass)}
+.contact-lines a:hover{color:var(--pass)}
+.cl-plain{font-family:"Archivo",sans-serif;font-weight:500}
+.form-card{background:var(--card);border:1px solid var(--rule);padding:1.9rem}
+.field{margin-bottom:1.1rem}
+.field label{display:block;font-family:"IBM Plex Mono",monospace;font-size:.66rem;letter-spacing:.11em;text-transform:uppercase;color:var(--mute);margin-bottom:.45rem}
+.field input,.field select,.field textarea{
+  width:100%;padding:.7rem .8rem;border:1px solid var(--rule);background:#fff;color:var(--ink);
+  font-family:"Archivo",sans-serif;font-size:.95rem;border-radius:0;
+}
+.field textarea{resize:vertical;font-family:"Source Serif 4",serif}
+.field input:focus,.field select:focus,.field textarea:focus{outline:2px solid var(--pass);outline-offset:0;border-color:var(--pass)}
+.field-hidden{position:absolute;left:-9999px}
+#enquiry button{margin-top:.4rem;width:100%;text-align:center}
+.form-note{font-size:.82rem;color:var(--mute);margin:1rem 0 0;line-height:1.5}
+.form-note a{color:var(--pass)}
+@media(max-width:900px){.contact-grid{grid-template-columns:1fr;gap:2.5rem}}
+
+footer{border-top:1px solid var(--rule);padding:1.8rem 0;font-family:"IBM Plex Mono",monospace;font-size:.7rem;color:var(--mute)}
+footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.8rem}
+
+/* ---- deadline strip ---- */
+.strip{background:var(--ink);color:var(--paper)}
+.strip .wrap{display:grid;grid-template-columns:auto 1fr auto;gap:2rem;align-items:center;padding:1.6rem 1.75rem}
+.strip-count{font-family:"Archivo Expanded",sans-serif;font-weight:700;font-size:2.6rem;line-height:1;color:#E0A855}
+.strip-count small{display:block;font-family:"IBM Plex Mono",monospace;font-size:.62rem;font-weight:400;letter-spacing:.14em;text-transform:uppercase;color:rgba(237,239,242,.55);margin-top:.5rem}
+.strip-say{font-size:1rem;max-width:76ch;color:rgba(237,239,242,.9)}
+.strip-say b{font-family:"Archivo",sans-serif;font-weight:600}
+.strip a.btn{white-space:nowrap}
+@media(max-width:860px){.strip .wrap{grid-template-columns:1fr;gap:1.2rem}}
+
+/* ---- guarantee ---- */
+.guarantee{border:2px solid var(--pass);padding:1.8rem 2rem;margin-top:2.6rem;background:var(--card)}
+.guarantee p{margin:0}
+.guarantee-label{font-family:"IBM Plex Mono",monospace;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--pass);margin-bottom:.7rem}
+.guarantee-say{font-family:"Archivo",sans-serif;font-weight:600;font-size:1.12rem;line-height:1.45;max-width:56ch}
+.guarantee-fine{font-size:.9rem;color:var(--mute);margin-top:.8rem;max-width:60ch}
+
+/* ---- query pack ---- */
+.qpack{margin-top:2.6rem;border-top:1px solid rgba(237,239,242,.2)}
+.qitem{padding:1.3rem 0;border-bottom:1px solid rgba(237,239,242,.14)}
+.qitem-head{display:flex;gap:1rem;align-items:baseline}
+.qnum{font-family:"IBM Plex Mono",monospace;font-size:.68rem;color:#E0A855;flex:0 0 1.8rem}
+.qname{font-family:"Archivo",sans-serif;font-weight:600;font-size:.98rem}
+.qwhere{font-size:.92rem;color:rgba(237,239,242,.72);margin:.45rem 0 0 2.8rem;max-width:62ch}
+.qcode{margin:.65rem 0 0 2.8rem;font-family:"IBM Plex Mono",monospace;font-size:.74rem;line-height:1.7;color:#BFE3CE;background:rgba(237,239,242,.06);border-left:2px solid var(--pass);padding:.7rem .9rem;overflow-x:auto;white-space:pre}
+@media(max-width:560px){.qwhere,.qcode{margin-left:0}}
+
+/* ---- calculator ---- */
+.calc{margin-top:3rem;display:grid;grid-template-columns:1fr 1.15fr;gap:3.5rem;align-items:start}
+.calc-fields{display:grid;grid-template-columns:1fr;gap:0;border-top:1px solid rgba(237,239,242,.2)}
+.cf{display:grid;grid-template-columns:1fr 7.5rem;gap:1rem;align-items:center;padding:.85rem 0;border-bottom:1px solid rgba(237,239,242,.14)}
+.cf label{font-size:.95rem;line-height:1.4}
+.cf span{display:block;font-family:"IBM Plex Mono",monospace;font-size:.63rem;letter-spacing:.08em;color:rgba(237,239,242,.45);margin-top:.25rem}
+.cf input{width:100%;padding:.5rem .6rem;background:transparent;border:1px solid rgba(237,239,242,.32);color:var(--paper);font-family:"IBM Plex Mono",monospace;font-size:.95rem;text-align:right;border-radius:0}
+.cf input:focus{outline:2px solid #E0A855;outline-offset:0}
+.calc-out{border:1px solid rgba(237,239,242,.22);padding:1.6rem 1.8rem;background:rgba(237,239,242,.04)}
+.co-verdict{font-family:"Archivo Expanded",sans-serif;font-weight:700;font-size:1.5rem;line-height:1.15;margin:0 0 .5rem}
+.co-sub{font-size:.98rem;color:rgba(237,239,242,.82);margin:0 0 1.5rem;max-width:44ch}
+.co-row{display:grid;grid-template-columns:1fr auto;gap:1rem;align-items:baseline;padding:.6rem 0;border-top:1px solid rgba(237,239,242,.14)}
+.co-row:first-of-type{border-top:0}
+.co-k{font-size:.92rem;color:rgba(237,239,242,.78)}
+.co-v{font-family:"Archivo Expanded",sans-serif;font-weight:700;font-size:1.15rem;white-space:nowrap}
+.co-v.warn{color:#E08C7A}
+.co-v.mid{color:#E0A855}
+.co-v.ok{color:#8FCBA6}
+.co-work{font-family:"IBM Plex Mono",monospace;font-size:.66rem;color:rgba(237,239,242,.42);margin-top:1.3rem;line-height:1.8;border-top:1px solid rgba(237,239,242,.14);padding-top:1rem}
+@media(max-width:900px){.calc{grid-template-columns:1fr;gap:2.5rem}}
+
+/* ---- motion ---- */
+@media (prefers-reduced-motion: no-preference){
+  .js .reveal{opacity:0;transform:translateY(16px);transition:opacity .7s cubic-bezier(.22,.7,.2,1),transform .7s cubic-bezier(.22,.7,.2,1)}
+  .js .reveal.in{opacity:1;transform:none}
+  .js .ledger .lrow{opacity:0;transform:translateX(-8px)}
+  .js .ledger.scanning .lrow{animation:rowin .5s cubic-bezier(.22,.7,.2,1) forwards}
+  @keyframes rowin{to{opacity:1;transform:none}}
+  .scanline{position:absolute;left:0;right:0;height:100px;pointer-events:none;top:0;opacity:0;
+    background:linear-gradient(180deg,rgba(63,125,92,0) 0%,rgba(63,125,92,.11) 60%,rgba(63,125,92,.34) 98%);
+    border-bottom:1px solid rgba(63,125,92,.55)}
+  .ledger.scanning .scanline{animation:sweep 1.7s cubic-bezier(.4,0,.3,1) forwards}
+  @keyframes sweep{0%{top:-100px;opacity:0}8%{opacity:1}88%{opacity:1}100%{top:100%;opacity:0}}
+  .fill{width:0 !important;transition:width 1.15s cubic-bezier(.22,.7,.2,1) .15s}
+  .gap.in .fill{width:var(--w) !important}
+  .strip-count{transition:color .4s}
+}
+.ledger{position:relative;overflow:hidden}
+.co-v{transition:color .25s}
+
+/* ---- should-vs-can chart ---- */
+.gap{margin-top:3rem;border-top:1px solid var(--rule);padding-top:2.2rem;max-width:56rem}
+.gap-title{font-family:"IBM Plex Mono",monospace;font-size:.66rem;letter-spacing:.13em;text-transform:uppercase;color:var(--mute);margin:0 0 1.8rem}
+.gaprow{display:grid;grid-template-columns:15rem 1fr;gap:1.4rem;align-items:center;margin-bottom:1.5rem}
+.gaprow p{margin:0;font-size:.95rem;line-height:1.4}
+.gaprow p b{font-family:"Archivo",sans-serif;font-weight:600;display:block;font-size:.98rem}
+.gaprow p em{font-style:normal;color:var(--mute);font-size:.88rem}
+.track{position:relative;height:2.6rem;background:rgba(22,35,58,.06);border:1px solid var(--rule)}
+.fill{position:absolute;inset:0 auto 0 0;display:flex;align-items:center;padding-left:.85rem;color:#fff;font-family:"IBM Plex Mono",monospace;font-size:.78rem;font-weight:500}
+.fill.ok{background:var(--pass)}
+.fill.bad{background:#B4553F}
+.gap-foot{font-family:"IBM Plex Mono",monospace;font-size:.66rem;color:var(--mute);line-height:1.8;border-top:1px solid var(--rule);padding-top:1rem;margin-top:.4rem}
+@media(max-width:640px){.gaprow{grid-template-columns:1fr;gap:.6rem}}
+
+/* ---- compact framework strip ---- */
+.fwlist{margin-top:2.6rem;border-top:1px solid var(--rule)}
+.fwrow{display:grid;grid-template-columns:14rem 1fr;gap:2rem;padding:1.15rem 0;border-bottom:1px solid var(--rule);align-items:baseline}
+.fwrow h3{font-family:"Archivo",sans-serif;font-size:1rem;font-weight:600;letter-spacing:0}
+.fwrow p{margin:0;font-size:.95rem;color:#2C3A54;max-width:60ch}
+@media(max-width:700px){.fwrow{grid-template-columns:1fr;gap:.4rem}}
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="wrap">
+    <div class="markblock">
+      <a class="mark" href="/">z<span>3</span>roday</a>
+      <span class="mark-sub">Day zero &middot; before anyone asks</span>
+    </div>
+    <nav>
+      <a href="/">AI exposure</a>
+      <a href="#deadline">10 December</a>
+      <a href="#frameworks">Standards</a>
+      <a href="#timeline">How long</a>
+      <a href="/#contact">Talk to us</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <p class="eyebrow">Certification &amp; privacy law</p>
+        <h1>A customer asked for your SOC 2 report. <em>Now what?</em></h1>
+        <p class="hero-sub">Separate from the AI work, and usually driven by someone else's deadline &mdash; a tender, an enterprise customer, a regulator. We assess where you stand, do the work to close the gaps, and manage the auditor.</p>
+        <div class="hero-actions">
+          <a class="btn btn-solid" href="/#contact">Talk to us</a>
+          <a class="btn btn-ghost" href="/">See the AI exposure work</a>
+        </div>
+      </div>
+
+      <div class="ledger" aria-label="Illustrative readiness register">
+        <div class="ledger-head">
+          <span class="ledger-title">Readiness register &mdash; extract</span>
+          <span class="ledger-meta">6 of 114</span>
+        </div>
+        <div class="lrow"><span class="ref">A.5.15</span><span class="ctl">Access control policy</span><span class="status s-ready">In place</span></div>
+        <div class="lrow"><span class="ref">A.8.16</span><span class="ctl">Monitoring activities</span><span class="status s-gap">Partial</span></div>
+        <div class="lrow"><span class="ref">A.5.30</span><span class="ctl">ICT readiness for continuity</span><span class="status s-missing">Missing</span></div>
+        <div class="lrow"><span class="ref">CC6.1</span><span class="ctl">Logical access &mdash; provisioning</span><span class="status s-gap">Partial</span></div>
+        <div class="lrow"><span class="ref">A.5.19</span><span class="ctl">Supplier security</span><span class="status s-missing">Missing</span></div>
+        <div class="lrow"><span class="ref">APP 1.7</span><span class="ctl">Automated decision disclosure</span><span class="status s-missing">Missing</span></div>
+        <div class="ledger-foot">One assessment, mapped to every standard you need. Illustrative only.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="strip">
+    <div class="wrap">
+      <div class="strip-count" id="countdown">&mdash;<small>days to APP 1.7</small></div>
+      <p class="strip-say"><b>10 December 2026.</b> New Australian Privacy Principle 1.7 commences. If a computer program uses personal information to make &mdash; or substantially help make &mdash; a decision that significantly affects someone, your privacy policy has to say so. It is a disclosure duty, not a ban. Most companies will find they are in scope and have nothing written.</p>
+      <a class="btn btn-light" href="#deadline">What this means</a>
+    </div>
+  </section>
+
+  <section class="band" id="deadline">
+    <div class="wrap">
+      <p class="eyebrow">The deadline nobody has budgeted for</p>
+      <h2>You do not need AI to be caught by APP 1.7.</h2>
+      <p class="lede">The rule says &ldquo;computer program&rdquo;, not AI. A system that declines an application, ranks job applicants, decides who gets a payment plan, flags a transaction as fraud, or sets a roster that affects pay &mdash; if personal information goes in and a decision that significantly affects someone comes out, you have to disclose it. It also covers decisions your <em>suppliers</em> make for you, which is where most companies get caught short.</p>
+
+      <ol class="deliverables" style="margin-top:2.6rem">
+        <li><strong>Find every system in scope, including bought ones</strong><span>Your own software, your SaaS platforms, and anything a supplier runs for you. Procurement contracts rarely say. Someone has to ask.</span></li>
+        <li><strong>Decide what counts, and write down why</strong><span>The judgement calls sit around &ldquo;substantially and directly related&rdquo; and &ldquo;significantly affect&rdquo;. Getting them right matters less than having a documented reason for each.</span></li>
+        <li><strong>Draft the privacy policy wording</strong><span>The kinds of personal information used, the kinds of decisions made by the program alone, and the kinds it substantially helps make. In plain English, because that is the point of the rule.</span></li>
+        <li><strong>Leave a register behind</strong><span>A forward-looking duty, not a one-off. Every new tool changes the answer, so it needs somewhere to live and someone who updates it.</span></li>
+      </ol>
+
+      <div class="check-actions" style="margin-top:2.4rem">
+        <a class="btn btn-solid" href="/#contact">Get this done before December</a>
+        <span class="check-note">Fixed fee AUD 3,500 &middot; two weeks &middot; delivered before 10 December or you don't pay</span>
+      </div>
+
+      <p class="fw-also" style="margin-top:2rem">We are not lawyers and this is not legal advice. We do the inventory, the technical scoping and the draft; your counsel signs it off. Where you don't have counsel, we'll introduce a privacy lawyer and tell you who they are before they start.</p>
+    </div>
+  </section>
+
+  <section class="band" id="frameworks">
+    <div class="wrap">
+      <p class="eyebrow">Standards we work to</p>
+      <h2>The same controls carry most of the way into the next standard.</h2>
+      <p class="lede">Most companies end up needing more than one. Assessed together, the overlap does the work.</p>
+
+      <div class="fwlist">
+        <div class="fwrow">
+          <h3>SOC 2 Type 1 &amp; Type 2</h3>
+          <p>What North American and enterprise buyers ask for by name. Scoping, control design, and evidence that survives the observation window.</p>
+        </div>
+        <div class="fwrow">
+          <h3>ISO/IEC 27001:2022</h3>
+          <p>What international and European customers recognise. Full build: scope, risk method, Statement of Applicability, internal audit and management review.</p>
+        </div>
+        <div class="fwrow">
+          <h3>ISO/IEC 42001</h3>
+          <p>The first certifiable AI management standard, adopted here as AS ISO/IEC 42001. Turns &ldquo;we're careful with AI&rdquo; into something a board can be shown. Certifications are still rare and auditors scarce, which is why being early is worth something in a tender.</p>
+        </div>
+        <div class="fwrow">
+          <h3>Essential Eight</h3>
+          <p>Still what insurers, tenders and assessors measure against. We assess against the current maturity model and build uplift that carries forward rather than becoming work you redo.</p>
+        </div>
+        <div class="fwrow">
+          <h3>APRA CPS 234 &amp; CPS 230</h3>
+          <p>If you supply banks, insurers or super funds, these reach you through your contracts. Information security capability, incident notification, and operational risk for material service providers.</p>
+        </div>
+        <div class="fwrow">
+          <h3>Privacy Act &amp; NZ Privacy Act 2020</h3>
+          <p>APP 1.7 disclosure, the Notifiable Data Breaches scheme, and the statutory tort of serious invasion of privacy live since June 2025. Plus NIST AI RMF and the EU AI Act if you sell into Europe.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="phases">
+    <div class="wrap">
+      <p class="eyebrow">How the work runs</p>
+      <h2>Assess, fix, certify, sustain. Take one phase or all four.</h2>
+
+      <div class="phase-grid">
+        <div class="phase">
+          <span class="phase-n">Phase 01</span>
+          <h3>Assess</h3>
+          <p>Control-by-control gap assessment, prioritised roadmap, policy gap list, evidence guide, and a costed path to certification.</p>
+          <p class="phase-fee">3&ndash;4 weeks &middot; fixed fee</p>
+        </div>
+        <div class="phase">
+          <span class="phase-n">Phase 02</span>
+          <h3>Remediate</h3>
+          <p>Policies written to how you actually work, controls implemented, tooling configured, evidence trail started. Hands on the console.</p>
+          <p class="phase-fee">Fixed-price sprint, quoted from the assessment</p>
+        </div>
+        <div class="phase">
+          <span class="phase-n">Phase 03</span>
+          <h3>Certify</h3>
+          <p>Auditor selection and briefing, evidence assembly, managing the request list through fieldwork, translating findings before they become surprises.</p>
+          <p class="phase-fee">Through the audit cycle &middot; monthly retainer</p>
+        </div>
+        <div class="phase">
+          <span class="phase-n">Phase 04</span>
+          <h3>Sustain</h3>
+          <p>Certification is annual. Access reviews, register upkeep, internal audit and surveillance prep, so year two isn't another scramble.</p>
+          <p class="phase-fee">From AUD 3,000/month</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band band-dark" id="timeline">
+    <div class="wrap">
+      <p class="eyebrow">Set expectations early</p>
+      <h2>SOC 2 Type 2 takes about a year. Most people are told six weeks.</h2>
+
+      <ol class="deliverables" style="margin-top:2.6rem">
+        <li><strong>Weeks 1&ndash;4 &middot; Readiness assessment</strong><span>Where you find out what you are actually working with.</span></li>
+        <li><strong>Months 2&ndash;5 &middot; Remediation</strong><span>Policies written, controls implemented, and &mdash; the part teams underestimate &mdash; controls operated long enough to leave a trail.</span></li>
+        <li><strong>Month 5 &middot; Auditor selection and Type 1</strong><span>A point-in-time report you can put in front of a customer while the clock runs on Type 2.</span></li>
+        <li><strong>Months 5&ndash;11 &middot; Observation window</strong><span>Three to six months in which your controls must demonstrably operate. It cannot be shortened, bought or backdated. The step nobody mentions.</span></li>
+        <li><strong>Months 11&ndash;12 &middot; Fieldwork and report</strong><span>The auditor tests your evidence and issues the report your customer asked for.</span></li>
+      </ol>
+
+      <p class="check-lede" style="margin-top:2.2rem">If a deal depends on a date, you need this map before you promise one &mdash; usually the difference between a Type 1 that holds the customer and a commitment you can't meet.</p>
+    </div>
+  </section>
+
+  <section class="band" id="inhouse">
+    <div class="wrap">
+      <p class="eyebrow">The option most teams try first</p>
+      <h2>Doing it in-house doesn't save money. It moves the cost onto your engineers.</h2>
+
+      <div class="phase-grid">
+        <div class="phase">
+          <span class="phase-n">01</span>
+          <h3>Engineering time</h3>
+          <p>A first certification absorbs a third to a half of a senior engineer for four to six months, plus a manager. That's a feature you didn't ship, at your most expensive internal rate.</p>
+        </div>
+        <div class="phase">
+          <span class="phase-n">02</span>
+          <h3>Learning on the clock</h3>
+          <p>The first attempt is also the training run. Scoping errors surface during fieldwork, which is the most expensive possible moment to find them.</p>
+        </div>
+        <div class="phase">
+          <span class="phase-n">03</span>
+          <h3>Key-person risk</h3>
+          <p>The knowledge ends up in one person's head. When they take leave &mdash; or another job &mdash; the evidence trail and the auditor relationship go with them.</p>
+        </div>
+        <div class="phase">
+          <span class="phase-n">04</span>
+          <h3>It comes back every year</h3>
+          <p>ISO 27001 brings annual surveillance audits and recertification every three years; SOC 2 needs a fresh report each year. Access reviews and register upkeep run indefinitely.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="faq">
+    <div class="wrap">
+      <p class="eyebrow">Before you ask</p>
+      <h2>Common questions.</h2>
+      <div class="faq">
+        <details>
+          <summary>We already bought a compliance platform. Do we still need you?</summary>
+          <div class="faq-body">
+            <p>Vanta, Drata and Sprinto watch controls you've already built. They don't decide what those controls should be, write policies that match your business, or configure the systems so the checks go green for real reasons. Most teams who stall sit at 60% with no idea which of the remaining 40% is an afternoon and which is three months. That gap is the job.</p>
+          </div>
+        </details>
+        <details>
+          <summary>Can you work with the auditor we've already chosen?</summary>
+          <div class="faq-body">
+            <p>Yes &mdash; the normal arrangement. We're not auditors and don't issue reports, so there's no independence question. We sit on your side and manage the relationship, the request list and the findings. If you haven't picked one, we'll shortlist firms that suit your size rather than price for enterprise.</p>
+          </div>
+        </details>
+        <details>
+          <summary>Can you do an IRAP assessment?</summary>
+          <div class="faq-body">
+            <p>No. IRAP assessments must be performed by an ASD-endorsed assessor and we don't hold that endorsement &mdash; anyone telling you otherwise is worth a second look. We can get you ready for one and help you close what the assessor finds.</p>
+          </div>
+        </details>
+        <details>
+          <summary>What does the whole thing cost, end to end?</summary>
+          <div class="faq-body">
+            <p>For 20 to 100 people on a modern cloud stack, budget AUD 50,000 to 90,000 across a first SOC 2 Type 2 or ISO 27001 cycle &mdash; including auditor fees and tooling, not just ours. The APP 1.7 work is far smaller at AUD 3,500. You get a specific number before you commit.</p>
+          </div>
+        </details>
+      </div>
+
+      <div class="check-actions" style="margin-top:3rem">
+        <a class="btn btn-solid" href="/#contact">Talk to us</a>
+        <span class="check-note">Half an hour, and a straight answer either way.</span>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>z3roday</span>
+    <span><a href="/" style="color:inherit">AI exposure</a> &middot; <a href="/privacy" style="color:inherit">Privacy</a></span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if(!reduce) document.documentElement.classList.add("js");
+
+  function countUp(el, to, ms){
+    if(reduce){ el.textContent = to.toLocaleString("en-AU"); return; }
+    var t0=null;
+    function step(ts){
+      if(!t0) t0=ts;
+      var k=Math.min((ts-t0)/ms,1), e=1-Math.pow(1-k,3);
+      el.textContent=Math.round(to*e).toLocaleString("en-AU");
+      if(k<1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
+  var el=document.getElementById("countdown");
+  if(el){
+    var target=new Date(2026,11,10), today=new Date(); today.setHours(0,0,0,0);
+    var days=Math.round((target-today)/86400000);
+    if(days>0){ el.innerHTML='<span id="cdNum">0</span><small>days to APP 1.7</small>'; countUp(document.getElementById("cdNum"),days,1100); }
+    else if(days===0){ el.innerHTML='Today<small>APP 1.7 commences</small>'; }
+    else { el.innerHTML=Math.abs(days)+'<small>days since APP 1.7 commenced</small>'; }
+  }
+
+  var revealSel=".band .eyebrow, .band h2, .band .lede, .phase, .fwrow, .deliverables li, .faq details";
+  var nodes=Array.prototype.slice.call(document.querySelectorAll(revealSel));
+  if(!reduce && "IntersectionObserver" in window){
+    nodes.forEach(function(n){ n.classList.add("reveal"); });
+    var io=new IntersectionObserver(function(es){
+      es.forEach(function(e){
+        if(!e.isIntersecting) return;
+        var sibs=Array.prototype.slice.call(e.target.parentNode.children).filter(function(c){return c.classList.contains("reveal");});
+        var i=Math.min(sibs.indexOf(e.target),5);
+        e.target.style.transitionDelay=(i>0?i*70:0)+"ms";
+        e.target.classList.add("in"); io.unobserve(e.target);
+      });
+    },{rootMargin:"0px 0px -12% 0px",threshold:0.08});
+    nodes.forEach(function(n){ io.observe(n); });
+  }
+})();
+</script>
+
+</body>
+</html>
