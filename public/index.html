@@ -13,6 +13,144 @@
 <link rel="canonical" href="https://z3roday.com/">
 <meta property="og:url" content="https://z3roday.com/">
 <meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "ProfessionalService",
+   "@id": "https://z3roday.com/#org",
+   "name": "z3roday",
+   "url": "https://z3roday.com/",
+   "email": "hello@z3roday.com",
+   "telephone": "+61420814130",
+   "description": "AI exposure assessment, APP 1.7 automated-decision disclosure, and ISO 27001, SOC 2 and ISO 42001 readiness for companies in Australia and New Zealand.",
+   "areaServed": [
+    {
+     "@type": "Country",
+     "name": "Australia"
+    },
+    {
+     "@type": "Country",
+     "name": "New Zealand"
+    }
+   ],
+   "knowsAbout": [
+    "Microsoft 365 Copilot",
+    "Microsoft Purview",
+    "Google Workspace",
+    "Australian Privacy Principles",
+    "APP 1.7",
+    "automated decision-making",
+    "ISO/IEC 42001",
+    "ISO/IEC 27001",
+    "SOC 2",
+    "Essential Eight",
+    "APRA CPS 234"
+   ],
+   "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Services",
+    "itemListElement": [
+     {
+      "@type": "Offer",
+      "name": "APP 1.7 disclosure sprint",
+      "priceCurrency": "AUD",
+      "price": "3500",
+      "description": "Automated decision-making inventory, scoping analysis and privacy policy disclosure, delivered before 10 December 2026."
+     },
+     {
+      "@type": "Offer",
+      "name": "AI exposure assessment",
+      "priceCurrency": "AUD",
+      "price": "6500",
+      "description": "Read-only assessment of what an AI assistant would surface across a Microsoft 365 or Google Workspace tenant."
+     }
+    ]
+   }
+  },
+  {
+   "@type": "WebSite",
+   "@id": "https://z3roday.com/#site",
+   "url": "https://z3roday.com/",
+   "name": "z3roday",
+   "publisher": {
+    "@id": "https://z3roday.com/#org"
+   }
+  },
+  {
+   "@type": "FAQPage",
+   "@id": "https://z3roday.com/#faq",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "Why would we give a stranger read access to everything we own?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "You shouldn't have to trust us to start. Access is read-only, scoped in the statement of work, granted through your own conditional access, time-boxed, and revoked on delivery — and every call we make appears in your audit log. We sign your NDA, not ours, and the register lives in your tenant. If you'd rather we never touch the environment, your admin can run our scripts and hand us the output. About a third of clients choose that."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Can't you just give us software we install, like Microsoft does?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Not honestly — anyone who says otherwise is selling you a dashboard. The controls live inside the platform you already own: Purview labelling and Restricted Access Control in Microsoft 365, Drive labels and DLP in Google Workspace. Different levers, different failure modes. What we make repeatable is the assessment."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "We already turned Copilot on. Is it too late?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "No — it's the more common situation. You now have a live retrieval surface over your whole estate and usually no record of what's been asked. The assessment adds two things: we read the interaction logs you already hold, and we close the highest-exposure content first."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Are we really in scope for APP 1.7? We don't use AI for decisions.",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Possibly not — and documenting that reasoning is itself the deliverable. But the rule says “computer program”, not AI, and covers decisions a program substantially helps make. Credit scoring, application triage, rostering that affects pay, fraud flags, applicant ranking: none need a model. What catches most companies is that it reaches decisions a supplier's program makes for you — and your contracts rarely give you the visibility to describe those accurately."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "We already bought a compliance platform. Do we still need you?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Vanta, Drata and Sprinto watch controls you've already built. They don't decide what those controls should be, write policies that match your business, or configure the systems so the checks go green for real reasons. Most teams who stall sit at 60% with no idea which of the remaining 40% is an afternoon and which is three months. That gap is the job."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Can you work with the auditor we've already chosen?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Yes — the normal arrangement. We're not auditors and don't issue reports, so there's no independence question. We sit on your side and manage the relationship, the request list and the findings. If you haven't picked one, we'll shortlist firms that suit your size rather than price for enterprise."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Can you do an IRAP assessment?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "No. IRAP assessments must be performed by an ASD-endorsed assessor and we don't hold that endorsement — anyone telling you otherwise is worth a second look. We can get you ready for one and help you close what the assessor finds."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "What does the whole thing cost, end to end?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "For 20 to 100 people on a modern cloud stack, budget AUD 50,000 to 90,000 across a first SOC 2 Type 2 or ISO 27001 cycle — including auditor fees and tooling, not just ours. The AI exposure work is far smaller: AUD 6,500, then a fixed-price remediation sprint quoted from the register. You get a number before you commit."
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -443,6 +581,16 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.8rem
           <p>Assistants now read channel history, Confluence spaces and ticket comments — where people paste credentials and salary discussions precisely because it felt like a conversation, not a document.</p>
         </div>
         <div class="fw">
+          <span class="fw-tag">ChatGPT · Claude · consumer accounts</span>
+          <h3>The tools nobody approved and everybody uses</h3>
+          <p>A different failure mode: not what the assistant can reach inside your tenant, but what staff paste into one outside it. Contract clauses, customer lists, incident detail, code. Usually on personal accounts, usually with good intentions, and invisible in your logs unless someone went looking. The fix is an approved-tool list with a real enterprise option on it, not a ban nobody follows.</p>
+        </div>
+        <div class="fw">
+          <span class="fw-tag">Lovable · v0 · Replit · Bolt</span>
+          <h3>Internal apps built in an afternoon</h3>
+          <p>Someone in ops ships a working tool in a weekend, wires it to a production database, and puts it on a public URL because auth looked like a later problem. It solves a real need, so it spreads. We find these, work out what they can read, and get them behind your identity provider without killing the thing that made them useful.</p>
+        </div>
+        <div class="fw">
           <span class="fw-tag">Your own build</span>
           <h3>Bespoke RAG, agents and MCP connections</h3>
           <p>Wire a vector store to a corpus and the permission model is now something you designed, whether you meant to or not. We look at retrieval-time authorisation, index isolation, logging, and what an agent may <em>do</em> rather than only read.</p>
@@ -526,7 +674,9 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.8rem
         <div class="calc-out" id="calcOut" aria-live="polite"></div>
       </div>
 
-      <div class="check-actions" style="margin-top:2.6rem">
+      <p class="check-lede" style="margin-top:2.8rem"><strong>What these six numbers cannot tell you:</strong> which documents are exposed, who specifically can reach them, or how the access was granted — inherited from a parent site, an open link, an orphaned group, or somebody clicking share in 2019. That last distinction is the whole of the remediation plan, because each one is fixed differently and takes a different amount of time. Counting sites is a thermometer. The assessment is the diagnosis.</p>
+
+      <div class="check-actions" style="margin-top:2.2rem">
         <a class="btn btn-light" href="#contact">Send us your numbers for a second opinion</a>
         <span class="check-note">Runs entirely in your browser. Nothing is transmitted.</span>
       </div>
